@@ -2,6 +2,23 @@
 
 const BATCHES = [
   {
+    title: "Belgrano campeón y Lupe",
+    date: "2026-05-25",
+    photos: [
+      { src: "images/1-dsc03755.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/2-dsc03748.jpg", alt: "", tags: ["Perro", "retrato"] },
+      { src: "images/3-dsc03754.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/4-dsc03741.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/5-dsc03745.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/6-dsc03737.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/7-dsc03736.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/8-dsc03735.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/9-dsc03732.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/10-dsc03738.jpg", alt: "", tags: ["Perro"] },
+      { src: "images/11-dsc03731.jpg", alt: "", tags: ["Perro"] },
+    ],
+  },
+  {
     title: "Siesta y Mandarinas",
     date: "2026-05-27",
     photos: [
