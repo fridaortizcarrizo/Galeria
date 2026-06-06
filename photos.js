@@ -2,6 +2,28 @@
 
 const BATCHES = [
   {
+    title: "Tanda sin título",
+    date: "2026-06-06",
+    photos: [
+      { src: "images/1-dsc05159-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/2-dsc05169-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/3-dsc05189-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/4-dsc05142-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/5-dsc05193-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/6-dsc05190-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/7-dsc05232-3.jpg", alt: "", tags: ["naturaleza", "retrato"] },
+      { src: "images/8-dsc05195-3.jpg", alt: "", tags: ["naturaleza", "retrato"] },
+      { src: "images/9-dsc05166-3.jpg", alt: "", tags: ["retrato"] },
+      { src: "images/10-dsc05191-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/11-dsc05194-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/12-dsc05156-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/13-dsc05151-3.jpg", alt: "", tags: ["naturaleza", "retrato"] },
+      { src: "images/14-dsc05155-3.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/15-dsc05154-3.jpg", alt: "", tags: ["naturaleza", "retrato"] },
+      { src: "images/16-dsc05143-3.jpg", alt: "", tags: ["naturaleza", "retrato"] },
+    ],
+  },
+  {
     title: "Belgrano campeón y Lupe",
     date: "2026-05-25",
     photos: [
