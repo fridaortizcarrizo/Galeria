@@ -2,6 +2,37 @@
 
 const BATCHES = [
   {
+    title: "Sesión de retratos con Fran",
+    date: "2026-05-31",
+    photos: [
+      { src: "images/1-dsc04364.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/2-dsc04284.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/3-dsc04280.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/4-dsc04236.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/5-dsc04386.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/6-dsc04412.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/7-dsc04337.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/8-dsc04349.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/9-dsc04416.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/10-dsc04345.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/11-dsc04338.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/12-dsc04356.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/13-dsc04347.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/14-dsc04340.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/15-dsc04341.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/16-dsc04350.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/17-dsc04355.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/18-dsc04351.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/19-dsc04358.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/20-dsc04363.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/21-dsc04361.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/22-dsc04372.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+      { src: "images/23-dsc04469.jpg", alt: "", tags: ["comida", "producto"] },
+      { src: "images/24-dsc04475.jpg", alt: "", tags: ["comida", "producto"] },
+      { src: "images/25-dsc04375.jpg", alt: "", tags: ["retrato", "naturaleza"] },
+    ],
+  },
+  {
     title: "Recibida Valen",
     date: "2026-06-05",
     photos: [
