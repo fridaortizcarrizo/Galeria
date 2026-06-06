@@ -21,15 +21,17 @@
   label{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin-bottom:.3rem}
   input,select,textarea{font-family:var(--mono);font-size:.9rem;color:var(--ink);background:#fffaf2;border:1px solid var(--line);border-radius:4px;padding:.55rem .7rem;width:100%}
   input:focus,textarea:focus{outline:none;border-color:var(--terracotta)}
-  details{border:1px solid var(--line);border-radius:8px;background:#fffaf2;margin-bottom:1.4rem}
-  summary{cursor:pointer;padding:.9rem 1rem;font-weight:700;font-size:.85rem;list-style:none}
-  summary::-webkit-details-marker{display:none}
-  summary::before{content:"\2699  ";color:var(--terracotta)}
-  .cfg{padding:0 1rem 1rem}
-  .cfg .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
-  .cfg .full{grid-column:1/-1}
-  .cfg small{display:block;color:var(--ink-soft);font-size:.72rem;margin-top:.7rem;line-height:1.6}
-  .cfg small b{color:var(--ink)}
+  .cfgbar{display:none;align-items:center;justify-content:space-between;gap:1rem;border:1px solid var(--line);border-radius:8px;background:#fffaf2;padding:.7rem 1rem;margin-bottom:1.4rem;font-size:.82rem}
+  .cfgbar .ok{color:var(--green);font-weight:700}
+  .cfgbar button{font-family:var(--mono);font-size:.75rem;background:transparent;border:1px solid var(--line);border-radius:5px;padding:.35rem .7rem;cursor:pointer;color:var(--ink-soft)}
+  .cfgbar button:hover{border-color:var(--terracotta);color:var(--terracotta)}
+  .cfgform{border:1px solid var(--line);border-radius:8px;background:#fffaf2;padding:1rem;margin-bottom:1.4rem}
+  .cfgform h2{font-family:var(--mono);font-weight:700;font-size:.85rem;margin-bottom:.9rem}
+  .cfgform h2::before{content:"\2699  ";color:var(--terracotta)}
+  .cfgform .grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+  .cfgform .full{grid-column:1/-1}
+  .cfgform small{display:block;color:var(--ink-soft);font-size:.72rem;margin-top:.7rem;line-height:1.6}
+  .cfgform small b{color:var(--ink)}
   .row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.3rem}
   .row>div{flex:1;min-width:160px}
   .drop{border:2px dashed var(--line);border-radius:8px;padding:2rem 1rem;text-align:center;color:var(--ink-soft);cursor:pointer;transition:.2s;background:#fffaf2}
@@ -38,12 +40,20 @@
   .opts{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin:1rem 0;font-size:.8rem;color:var(--ink-soft)}
   .opts label{display:inline-flex;align-items:center;gap:.4rem;text-transform:none;letter-spacing:0;margin:0;cursor:pointer}
   .opts input[type=checkbox]{width:auto}.opts input[type=number]{width:80px}
+  .bulkbar{display:none;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem;padding:.7rem .9rem;background:#fff6ea;border:1px dashed var(--line);border-radius:8px}
+  .bulkbar .lbl{font-size:.72rem;color:var(--ink-soft);white-space:nowrap}
+  .bulkbar input{flex:1;min-width:130px}
+  .bulkbar button{font-family:var(--mono);font-weight:700;font-size:.76rem;background:var(--ink);color:var(--paper);border:none;border-radius:5px;padding:.5rem .9rem;cursor:pointer;white-space:nowrap}
+  .bulkbar button:hover{background:var(--terracotta)}
   .photo{display:flex;gap:1rem;align-items:flex-start;padding:1rem;border:1px solid var(--line);border-radius:8px;margin-bottom:.9rem;background:#fffaf2}
   .photo img{width:90px;height:90px;object-fit:cover;border-radius:4px;flex-shrink:0;background:var(--paper-deep)}
   .photo .fields{flex:1;min-width:0}
   .photo .fname{font-size:.66rem;color:var(--ink-soft);word-break:break-all;margin-bottom:.5rem}
-  .photo .pair{display:flex;gap:.7rem;flex-wrap:wrap}
-  .photo .pair>div{flex:1;min-width:130px}
+  .photo .blk{margin-bottom:.6rem}
+  .tags-wrap{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+  .chip-tag{display:inline-flex;align-items:center;gap:.3rem;background:var(--paper-deep);border:1px solid var(--line);border-radius:999px;padding:.2rem .6rem;font-size:.72rem;cursor:pointer}
+  .chip-tag:hover{border-color:var(--red);color:var(--red)}
+  .tagin{width:150px!important;flex:0 0 auto;padding:.32rem .55rem;font-size:.8rem}
   .x{background:none;border:1px solid var(--line);border-radius:4px;color:var(--ink-soft);cursor:pointer;padding:.3rem .6rem;font-family:var(--mono);font-size:.72rem}
   .x:hover{border-color:var(--terracotta);color:var(--terracotta)}
   .actions{display:flex;gap:.7rem;flex-wrap:wrap;margin:1.5rem 0 1rem}
@@ -61,31 +71,63 @@
   .status a{color:inherit}
   textarea.code{font-size:.76rem;line-height:1.6;min-height:150px;white-space:pre;overflow:auto;background:#2e1b0d;color:#ffe9cf;border:none}
   .empty{color:var(--ink-soft);text-align:center;padding:1.2rem;font-size:.85rem}
-  .saved{color:var(--green);font-size:.72rem;margin-top:.5rem}
+  .saved{color:var(--green);font-size:.72rem;margin-top:.5rem;display:inline-block}
+  /* administrar publicadas */
+  .m-batch{border:1px solid var(--line);border-radius:8px;padding:.8rem;margin:.8rem 0;background:#fffaf2}
+  .m-head{display:flex;gap:.6rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:.7rem}
+  .m-head .f{flex:1;min-width:120px}
+  .m-del{background:none;border:1px solid var(--line);border-radius:5px;color:var(--red);padding:.4rem .7rem;font-family:var(--mono);font-size:.72rem;cursor:pointer;white-space:nowrap}
+  .m-del:hover{border-color:var(--red)}
+  .m-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:.5rem}
+  .m-photo{position:relative}
+  .m-photo img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;background:var(--paper-deep);display:block}
+  .m-photo button{position:absolute;top:3px;right:3px;background:rgba(184,68,42,.95);color:#fff;border:none;border-radius:999px;width:22px;height:22px;cursor:pointer;font-size:.72rem;line-height:1}
+  .m-photo button:hover{background:#8f3320}
+  #manage{border:1px solid var(--line);border-radius:8px;background:#fffaf2;margin-bottom:1.4rem}
+  #manage>summary{cursor:pointer;padding:.9rem 1rem;font-weight:700;font-size:.85rem;list-style:none}
+  #manage>summary::-webkit-details-marker{display:none}
+  #manage>summary::before{content:"\1f5c2  "}
 </style>
 </head>
 <body>
   <h1>Etiquetador <em>+ publicador</em></h1>
-  <p class="sub">Arrastrá tus fotos, etiquetá cada una, y con un clic se suben y aparecen en tu sitio. Todo corre en tu navegador.</p>
+  <p class="sub">Arrastrá tus fotos, ponele uno o varios tags a cada una, y con un clic se suben y aparecen en tu sitio.</p>
 
-  <details id="cfg">
-    <summary>Configuración de GitHub (se completa una sola vez)</summary>
+  <!-- barra compacta cuando ya está configurado -->
+  <div class="cfgbar" id="cfgBar">
+    <span><span class="ok">✓ GitHub conectado</span> · <span id="cfgWho"></span></span>
+    <button id="btnEditCfg">editar</button>
+  </div>
+
+  <!-- formulario de configuración -->
+  <div class="cfgform" id="cfgForm">
+    <h2>Configuración de GitHub (una sola vez)</h2>
+    <div class="grid">
+      <div><label>Usuario de GitHub</label><input id="ghOwner" placeholder="fridaortizcarrizo" /></div>
+      <div><label>Repositorio</label><input id="ghRepo" placeholder="galeria" /></div>
+      <div><label>Rama</label><input id="ghBranch" placeholder="main" value="main" /></div>
+      <div><label>URL del sitio (opcional)</label><input id="ghSite" placeholder="https://tusitio.com" /></div>
+      <div class="full"><label>Token de acceso</label><input id="ghToken" type="password" placeholder="github_pat_..." /></div>
+    </div>
+    <button class="btn btn-ghost" id="btnSaveCfg" style="margin-top:.9rem">Guardar configuración</button>
+    <span class="saved" id="cfgSaved"></span>
+    <small>
+      Token: <b>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>.
+      En <b>Repository access</b> elegí tu repo de la galería, y en <b>Permissions → Contents</b> poné <b>Read and write</b>.
+      Se guarda solo en este navegador. Nunca se comparte.
+    </small>
+  </div>
+
+  <details id="manage">
+    <summary>Administrar / corregir fotos publicadas</summary>
     <div class="cfg">
-      <div class="grid">
-        <div><label>Usuario de GitHub</label><input id="ghOwner" placeholder="fridaortizcarrizo" /></div>
-        <div><label>Repositorio</label><input id="ghRepo" placeholder="galeria" /></div>
-        <div><label>Rama</label><input id="ghBranch" placeholder="main" value="main" /></div>
-        <div><label>URL del sitio (opcional)</label><input id="ghSite" placeholder="https://tusitio.com" /></div>
-        <div class="full"><label>Token de acceso</label><input id="ghToken" type="password" placeholder="github_pat_..." /></div>
+      <p style="font-size:.78rem;color:var(--ink-soft);margin-bottom:.7rem">Corregí la fecha de una tanda, o borrá fotos/tandas. Al guardar se actualiza tu sitio.</p>
+      <button class="btn btn-ghost" id="btnLoadManage">Cargar publicadas</button>
+      <div id="manageList"></div>
+      <div class="actions" id="manageActions" style="display:none">
+        <button class="btn btn-primary" id="btnSaveManage">Guardar cambios</button>
       </div>
-      <button class="btn btn-ghost" id="btnSaveCfg" style="margin-top:.9rem">Guardar configuración</button>
-      <span class="saved" id="cfgSaved"></span>
-      <small>
-        El token es tu llave para que esta herramienta publique sola. Para crearlo:
-        <b>GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</b>.
-        En <b>Repository access</b> elegí solo tu repo de la galería, y en <b>Permissions → Contents</b> poné <b>Read and write</b>. Copiá el token y pegalo acá.
-        Se guarda solo en este navegador, en tu compu. Nunca se comparte.
-      </small>
+      <div class="status" id="manageStatus"></div>
     </div>
   </details>
 
@@ -105,6 +147,12 @@
     <label><input id="optSlug" type="checkbox" checked /> Limpiar nombres</label>
   </div>
 
+  <div class="bulkbar" id="bulkbar">
+    <span class="lbl">Mismo tag para todas:</span>
+    <input id="bulkTag" list="cats" placeholder="ej: animales" />
+    <button id="btnBulk">Aplicar a todas</button>
+  </div>
+
   <div id="list"></div>
   <div class="empty" id="empty">Todavía no agregaste fotos.</div>
 
@@ -114,29 +162,38 @@
   </div>
 
   <div class="status" id="status"></div>
-
-  <textarea class="code" id="code" readonly placeholder="(opcional) Acá aparece el código por si querés pegarlo a mano..." style="display:none"></textarea>
+  <textarea class="code" id="code" readonly placeholder="(opcional) Código por si querés pegarlo a mano..." style="display:none"></textarea>
 
 <script>
 (function(){
   "use strict";
-  var photos = [];
-  var CATS = ["retrato","animales","viajes","ciudad","naturaleza","comida","abstracto"];
+  var photos = [];                       // {file, alt, tags:[], url}
+  var CATS = ["retrato","animales","viajes","ciudad","naturaleza","comida","abstracto","familia"];
+  var editingCfg = false;
   var $ = function(id){ return document.getElementById(id); };
 
+  // ---------- config local ----------
   function lsGet(k){ try{ return localStorage.getItem(k)||""; }catch(e){ return ""; } }
   function lsSet(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-  ["ghOwner","ghRepo","ghBranch","ghSite","ghToken"].forEach(function(k){
-    var v = lsGet("gal_"+k); if(v) $(k).value = v;
-  });
+  function isConfigured(){ return !!(lsGet("gal_ghOwner") && lsGet("gal_ghRepo") && lsGet("gal_ghToken")); }
+  function refreshCfgUI(){
+    var show = isConfigured() && !editingCfg;
+    $("cfgForm").style.display = show ? "none" : "block";
+    $("cfgBar").style.display = show ? "flex" : "none";
+    if(show) $("cfgWho").textContent = lsGet("gal_ghOwner")+"/"+lsGet("gal_ghRepo");
+  }
+  ["ghOwner","ghRepo","ghBranch","ghSite","ghToken"].forEach(function(k){ var v=lsGet("gal_"+k); if(v) $(k).value=v; });
   $("btnSaveCfg").addEventListener("click", function(){
     ["ghOwner","ghRepo","ghBranch","ghSite","ghToken"].forEach(function(k){ lsSet("gal_"+k, $(k).value.trim()); });
-    $("cfgSaved").textContent = "✓ Guardado";
-    setTimeout(function(){ $("cfgSaved").textContent=""; }, 2000);
+    editingCfg = false; refreshCfgUI();
+    $("cfgSaved").textContent = "✓ Guardado"; setTimeout(function(){ $("cfgSaved").textContent=""; }, 2000);
   });
+  $("btnEditCfg").addEventListener("click", function(){ editingCfg = true; refreshCfgUI(); });
+  refreshCfgUI();
 
   $("batchDate").value = new Date().toISOString().slice(0,10);
 
+  // ---------- nombres ----------
   function slugify(name){
     var dot=name.lastIndexOf("."); var base=dot>0?name.slice(0,dot):name;
     base=base.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");
@@ -145,37 +202,77 @@
   function useSlug(){ return $("optSlug").checked; }
   function srcNameFor(file){ return useSlug()?slugify(file.name):file.name; }
   function escJs(s){ return String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"'); }
-  function escAttr(s){ return String(s).replace(/"/g,"&quot;"); }
+  function escAttr(s){ return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;"); }
 
+  // ---------- tags ----------
+  function addTag(i, val){
+    val=(val||"").trim().replace(/,$/,"").trim();
+    if(val && photos[i].tags.indexOf(val)===-1) photos[i].tags.push(val);
+  }
+  function removeTag(i, ti){ photos[i].tags.splice(ti,1); }
+
+  // ---------- lista ----------
   function addFiles(files){
     Array.prototype.forEach.call(files,function(f){
-      if(!f.type || !f.type.indexOf || f.type.indexOf("image/")!==0) return;
-      photos.push({file:f,alt:"",category:"",url:URL.createObjectURL(f)});
+      if(!f.type || f.type.indexOf("image/")!==0) return;
+      photos.push({file:f,alt:"",tags:[],url:URL.createObjectURL(f)});
     });
     render();
   }
   function render(){
     var listEl=$("list"); listEl.innerHTML="";
     $("empty").style.display = photos.length?"none":"block";
+    $("bulkbar").style.display = photos.length?"flex":"none";
     photos.forEach(function(p,i){
+      var chips = p.tags.map(function(t,ti){
+        return '<span class="chip-tag" data-i="'+i+'" data-t="'+ti+'">'+escAttr(t)+' \u00d7</span>';
+      }).join("");
       var el=document.createElement("div"); el.className="photo";
       el.innerHTML='<img src="'+p.url+'" alt=""/>'+
-        '<div class="fields"><div class="fname">images/'+srcNameFor(p.file)+'</div>'+
-        '<div class="pair">'+
-        '<div><label>Etiqueta</label><input list="cats" value="'+escAttr(p.category)+'" placeholder="animales, retrato..." data-i="'+i+'" data-k="category"/></div>'+
-        '<div><label>Descripción</label><input value="'+escAttr(p.alt)+'" placeholder="Perro corriendo" data-i="'+i+'" data-k="alt"/></div>'+
-        '</div></div><button class="x" data-rm="'+i+'">quitar</button>';
+        '<div class="fields">'+
+          '<div class="fname">images/'+srcNameFor(p.file)+'</div>'+
+          '<div class="blk"><label>Tags</label><div class="tags-wrap">'+chips+
+            '<input class="tagin" list="cats" data-i="'+i+'" placeholder="+ tag y Enter" /></div></div>'+
+          '<div class="blk"><label>Descripción</label><input value="'+escAttr(p.alt)+'" placeholder="Perro corriendo" data-i="'+i+'" data-k="alt" /></div>'+
+        '</div>'+
+        '<button class="x" data-rm="'+i+'">quitar</button>';
       listEl.appendChild(el);
     });
   }
+  // alt
   $("list").addEventListener("input",function(e){
     var i=e.target.getAttribute("data-i"),k=e.target.getAttribute("data-k");
-    if(i!==null&&k){ photos[i][k]=e.target.value; }
+    if(i!==null&&k==="alt"){ photos[i].alt=e.target.value; }
   });
+  // agregar tag con Enter o coma
+  $("list").addEventListener("keydown",function(e){
+    if(!e.target.classList.contains("tagin")) return;
+    if(e.key==="Enter"||e.key===","){
+      e.preventDefault();
+      var i=parseInt(e.target.getAttribute("data-i"),10);
+      addTag(i,e.target.value); render();
+      var again=document.querySelector('.tagin[data-i="'+i+'"]'); if(again) again.focus();
+    }
+  });
+  // quitar foto o quitar tag
   $("list").addEventListener("click",function(e){
     var rm=e.target.getAttribute("data-rm");
-    if(rm!==null){ URL.revokeObjectURL(photos[rm].url); photos.splice(rm,1); render(); }
+    if(rm!==null){ URL.revokeObjectURL(photos[rm].url); photos.splice(rm,1); render(); return; }
+    if(e.target.classList.contains("chip-tag")){
+      var i=parseInt(e.target.getAttribute("data-i"),10), ti=parseInt(e.target.getAttribute("data-t"),10);
+      removeTag(i,ti); render();
+    }
   });
+  // bulk: aplicar tag a todas
+  $("btnBulk").addEventListener("click",function(){
+    var val=$("bulkTag").value;
+    if(!val.trim()) return;
+    for(var i=0;i<photos.length;i++) addTag(i,val);
+    $("bulkTag").value=""; render();
+  });
+  $("bulkTag").addEventListener("keydown",function(e){ if(e.key==="Enter"){ e.preventDefault(); $("btnBulk").click(); } });
+
+  // drop
   var drop=$("drop"),fileInput=$("file");
   drop.addEventListener("click",function(){ fileInput.click(); });
   fileInput.addEventListener("change",function(){ addFiles(fileInput.files); fileInput.value=""; });
@@ -186,12 +283,11 @@
   CATS.forEach(function(c){ var o=document.createElement("option"); o.value=c; dl.appendChild(o); });
   document.body.appendChild(dl);
 
+  // ---------- optimizar ----------
   function fileToOptimizedB64(file){
     return new Promise(function(resolve,reject){
       if(!$("optResize").checked){
-        var fr=new FileReader();
-        fr.onload=function(){ resolve(String(fr.result).split(",")[1]); };
-        fr.onerror=reject; fr.readAsDataURL(file); return;
+        var fr=new FileReader(); fr.onload=function(){ resolve(String(fr.result).split(",")[1]); }; fr.onerror=reject; fr.readAsDataURL(file); return;
       }
       var max=parseInt($("optMax").value,10)||1600;
       var img=new Image();
@@ -206,99 +302,180 @@
     });
   }
 
+  // ---------- base64 utf8 ----------
   function utf8ToB64(str){ return btoa(unescape(encodeURIComponent(str))); }
   function b64ToUtf8(b64){ return decodeURIComponent(escape(atob(b64.replace(/\n/g,"")))); }
 
-  function cfg(){
-    return { owner:$("ghOwner").value.trim(), repo:$("ghRepo").value.trim(),
-      branch:($("ghBranch").value.trim()||"main"), token:$("ghToken").value.trim(),
-      site:$("ghSite").value.trim() };
-  }
-  function ghHeaders(token){
-    return { "Authorization":"Bearer "+token, "Accept":"application/vnd.github+json", "X-GitHub-Api-Version":"2022-11-28" };
-  }
-  function apiUrl(c,path){
-    return "https://api.github.com/repos/"+encodeURIComponent(c.owner)+"/"+encodeURIComponent(c.repo)+"/contents/"+path;
-  }
+  // ---------- GitHub ----------
+  function cfg(){ return { owner:lsGet("gal_ghOwner")||$("ghOwner").value.trim(), repo:lsGet("gal_ghRepo")||$("ghRepo").value.trim(),
+    branch:(lsGet("gal_ghBranch")||$("ghBranch").value.trim()||"main"), token:lsGet("gal_ghToken")||$("ghToken").value.trim(),
+    site:lsGet("gal_ghSite")||$("ghSite").value.trim() }; }
+  function ghHeaders(t){ return {"Authorization":"Bearer "+t,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}; }
+  function apiUrl(c,path){ return "https://api.github.com/repos/"+encodeURIComponent(c.owner)+"/"+encodeURIComponent(c.repo)+"/contents/"+path; }
   function getFile(c,path){
     return fetch(apiUrl(c,path)+"?ref="+encodeURIComponent(c.branch),{headers:ghHeaders(c.token)})
       .then(function(r){ if(r.status===404) return null; if(!r.ok) return r.text().then(function(t){ throw new Error("GET "+path+": "+r.status+" "+t.slice(0,120)); }); return r.json(); });
   }
-  function putFile(c,path,b64content,message,sha){
-    var body={ message:message, content:b64content, branch:c.branch };
-    if(sha) body.sha=sha;
+  function putFile(c,path,b64,message,sha){
+    var body={message:message,content:b64,branch:c.branch}; if(sha) body.sha=sha;
     return fetch(apiUrl(c,path),{method:"PUT",headers:ghHeaders(c.token),body:JSON.stringify(body)})
       .then(function(r){ if(!r.ok) return r.text().then(function(t){ throw new Error("PUT "+path+": "+r.status+" "+t.slice(0,160)); }); return r.json(); });
   }
   function freePath(c,path){
     return getFile(c,path).then(function(res){
       if(!res) return path;
-      var dot=path.lastIndexOf("."), base=path.slice(0,dot), ext=path.slice(dot), n=2;
+      var dot=path.lastIndexOf("."),base=path.slice(0,dot),ext=path.slice(dot),n=2;
       function tryN(){ var pp=base+"-"+n+ext; return getFile(c,pp).then(function(r){ if(!r) return pp; n++; return tryN(); }); }
       return tryN();
     });
   }
   function buildBatchBlock(title,date,used){
     var lines=used.map(function(u){
-      return '      { src: "'+u.path+'", alt: "'+escJs(u.alt)+'", category: "'+escJs(u.category)+'" },';
+      var tags="["+u.tags.map(function(t){ return '"'+escJs(t)+'"'; }).join(", ")+"]";
+      return '      { src: "'+u.path+'", alt: "'+escJs(u.alt)+'", tags: '+tags+' },';
     }).join("\n");
-    return "\n  {\n"+
-      '    title: "'+escJs(title)+'",\n'+
-      '    date: "'+date+'",\n'+
-      "    photos: [\n"+lines+"\n    ],\n"+
-      "  },";
+    return "\n  {\n"+'    title: "'+escJs(title)+'",\n'+'    date: "'+date+'",\n'+"    photos: [\n"+lines+"\n    ],\n"+"  },";
   }
   function setStatus(kind,html){ var s=$("status"); s.className="status show "+kind; s.innerHTML=html; }
 
+  // ---------- código manual ----------
   $("btnCode").addEventListener("click",function(){
     var title=$("batchTitle").value.trim()||"Tanda sin título";
     var date=$("batchDate").value||new Date().toISOString().slice(0,10);
-    var used=photos.map(function(p){ return {path:"images/"+srcNameFor(p.file),alt:p.alt,category:p.category}; });
+    var used=photos.map(function(p){ return {path:"images/"+srcNameFor(p.file),alt:p.alt,tags:p.tags}; });
     var ta=$("code"); ta.style.display="block"; ta.value=buildBatchBlock(title,date,used).replace(/^\n/,""); ta.select();
   });
 
+  // ---------- publicar ----------
   $("btnPublish").addEventListener("click",function(){
     var c=cfg();
-    if(!c.owner||!c.repo||!c.token){ setStatus("err","Completá usuario, repositorio y token en <b>Configuración de GitHub</b>."); $("cfg").open=true; return; }
+    if(!c.owner||!c.repo||!c.token){ setStatus("err","Completá usuario, repositorio y token en <b>Configuración de GitHub</b>."); editingCfg=true; refreshCfgUI(); return; }
     if(!photos.length){ setStatus("err","Agregá al menos una foto."); return; }
     var title=$("batchTitle").value.trim()||"Tanda sin título";
     var date=$("batchDate").value||new Date().toISOString().slice(0,10);
-    var btn=$("btnPublish"); btn.disabled=true;
-    var used=[];
+    var btn=$("btnPublish"); btn.disabled=true; var used=[];
     (async function(){
       try{
         for(var i=0;i<photos.length;i++){
           var p=photos[i];
-          setStatus("work","Subiendo foto "+(i+1)+" de "+photos.length+"…");
+          setStatus("work","Subiendo foto "+(i+1)+" de "+photos.length+"\u2026");
           var b64=await fileToOptimizedB64(p.file);
           var path=await freePath(c,"images/"+srcNameFor(p.file));
           await putFile(c,path,b64,"add "+path);
-          used.push({path:path,alt:p.alt,category:p.category});
+          used.push({path:path,alt:p.alt,tags:p.tags});
         }
-        setStatus("work","Actualizando el sitio…");
-        var idx=await getFile(c,"index.html");
-        if(!idx) throw new Error("No encontré index.html en el repo. ¿Está subido y la rama es correcta?");
+        setStatus("work","Actualizando el sitio\u2026");
+        var idx=await getFile(c,"photos.js");
+        if(!idx) throw new Error("No encontré photos.js en el repo. ¿Está subido y la rama es correcta?");
         var text=b64ToUtf8(idx.content);
         var marker="const BATCHES = [";
         var at=text.indexOf(marker);
-        if(at<0) throw new Error("No encontré 'const BATCHES = [' en index.html.");
+        if(at<0) throw new Error("No encontré 'const BATCHES = [' en photos.js.");
         var insertAt=at+marker.length;
         var newText=text.slice(0,insertAt)+buildBatchBlock(title,date,used)+text.slice(insertAt);
-        await putFile(c,"index.html",utf8ToB64(newText),"nueva tanda: "+title,idx.sha);
-        var link = c.site ? '<a href="'+c.site+'" target="_blank">'+c.site+'</a>' : "tu sitio";
-        setStatus("ok","✓ ¡Publicado! "+used.length+" foto(s) subidas. "+link+" se actualiza en ~1 minuto (Netlify).");
-        photos.forEach(function(p){ URL.revokeObjectURL(p.url); });
-        photos=[]; render(); $("batchTitle").value="";
+        await putFile(c,"photos.js",utf8ToB64(newText),"nueva tanda: "+title,idx.sha);
+        var link=c.site?'<a href="'+c.site+'" target="_blank">'+c.site+'</a>':"tu sitio";
+        setStatus("ok","✓ ¡Publicado! "+used.length+" foto(s). "+link+" se actualiza en ~1 minuto.");
+        photos.forEach(function(p){ URL.revokeObjectURL(p.url); }); photos=[]; render(); $("batchTitle").value="";
       }catch(err){
         var hint="";
         if(/:\s*401/.test(err.message)) hint=" — El token es inválido o expiró.";
-        else if(/:\s*403/.test(err.message)) hint=" — El token no tiene permiso Contents: Read and write sobre este repo.";
+        else if(/:\s*403/.test(err.message)) hint=" — El token no tiene permiso Contents: Read and write.";
         else if(/:\s*404/.test(err.message)) hint=" — Revisá usuario, repositorio y rama.";
-        else if(/Failed to fetch|NetworkError/i.test(err.message)) hint=" — Si abriste el archivo con doble clic (file://) y falla, subí este tagger.html a tu sitio o a localhost y usalo desde ahí.";
-        setStatus("err","✗ "+err.message+hint);
+        else if(/Failed to fetch|NetworkError/i.test(err.message)) hint=" — Si lo abriste con doble clic (file://) y falla, subí este tagger.html a tu sitio y usalo desde ahí.";
+        setStatus("err","\u2717 "+err.message+hint);
       }finally{ btn.disabled=false; }
     })();
   });
+
+  // ───────── administrar publicadas ─────────
+  var mBatches = null, mSha = null, mRemoved = [];
+  function rawUrl(c, src){ return "https://raw.githubusercontent.com/"+c.owner+"/"+c.repo+"/"+c.branch+"/"+src; }
+  function parseBatches(text){
+    var i = text.indexOf("["), j = text.lastIndexOf("]");
+    return new Function("return " + text.slice(i, j + 1) + ";")();
+  }
+  function serializeBatches(arr){
+    var body = arr.map(function(b){
+      var photos = (b.photos || []).map(function(ph){
+        var tags = Array.isArray(ph.tags) ? ph.tags : (ph.category ? [ph.category] : []);
+        var ts = "[" + tags.map(function(t){ return '"' + escJs(t) + '"'; }).join(", ") + "]";
+        return '      { src: "' + escJs(ph.src) + '", alt: "' + escJs(ph.alt || "") + '", tags: ' + ts + ' },';
+      }).join("\n");
+      return "  {\n    title: \"" + escJs(b.title || "") + "\",\n    date: \"" + (b.date || "") + "\",\n    photos: [\n" + photos + "\n    ],\n  },";
+    }).join("\n");
+    return "/* TUS FOTOS. Lo maneja el etiquetador (tagger). */\n\nconst BATCHES = [\n" + body + "\n];\n";
+  }
+  function mStatus(kind, html){ var s = $("manageStatus"); s.className = "status show " + kind; s.innerHTML = html; }
+  function renderManage(){
+    var box = $("manageList"); box.innerHTML = "";
+    var c = cfg();
+    mBatches.forEach(function(b, bi){
+      var el = document.createElement("div"); el.className = "m-batch";
+      var photos = (b.photos || []).map(function(ph, pi){
+        return '<div class="m-photo"><img loading="lazy" src="' + rawUrl(c, ph.src) + '" alt=""/>' +
+          '<button title="borrar foto" data-delp="' + bi + '_' + pi + '">×</button></div>';
+      }).join("");
+      el.innerHTML =
+        '<div class="m-head">' +
+          '<div class="f"><label>Título</label><input value="' + escAttr(b.title || "") + '" data-bi="' + bi + '" data-mf="title"/></div>' +
+          '<div class="f"><label>Fecha</label><input type="date" value="' + (b.date || "") + '" data-bi="' + bi + '" data-mf="date"/></div>' +
+          '<button class="m-del" data-delb="' + bi + '">borrar tanda</button>' +
+        '</div>' +
+        '<div class="m-photos">' + photos + '</div>';
+      box.appendChild(el);
+    });
+    $("manageActions").style.display = mBatches.length ? "flex" : "block";
+    if (!mBatches.length) box.innerHTML = '<p style="color:var(--ink-soft);font-size:.82rem;padding:.5rem 0">No quedan fotos. Guardá para confirmar.</p>';
+  }
+  $("btnLoadManage").addEventListener("click", function(){
+    var c = cfg();
+    if (!c.owner || !c.repo || !c.token){ mStatus("err", "Configurá GitHub primero (arriba)."); return; }
+    mStatus("work", "Cargando…");
+    getFile(c, "photos.js").then(function(f){
+      if (!f) throw new Error("No encontré photos.js en el repo.");
+      mSha = f.sha; mRemoved = [];
+      mBatches = parseBatches(b64ToUtf8(f.content));
+      renderManage(); mStatus("ok", "Listo. Editá y después Guardar cambios.");
+    }).catch(function(e){ mStatus("err", "✗ " + e.message); });
+  });
+  $("manageList").addEventListener("input", function(e){
+    var bi = e.target.getAttribute("data-bi"), mf = e.target.getAttribute("data-mf");
+    if (bi !== null && mf){ mBatches[bi][mf] = e.target.value; }
+  });
+  $("manageList").addEventListener("click", function(e){
+    var delp = e.target.getAttribute("data-delp");
+    if (delp){ var a = delp.split("_"), bi = +a[0], pi = +a[1]; var ph = mBatches[bi].photos[pi]; if (ph) mRemoved.push(ph.src); mBatches[bi].photos.splice(pi, 1); renderManage(); return; }
+    var delb = e.target.getAttribute("data-delb");
+    if (delb !== null && delb !== undefined && e.target.classList.contains("m-del")){
+      var bi2 = +delb; (mBatches[bi2].photos || []).forEach(function(ph){ mRemoved.push(ph.src); }); mBatches.splice(bi2, 1); renderManage();
+    }
+  });
+  async function deleteFile(c, path){
+    try{ var f = await getFile(c, path); if (!f) return;
+      await fetch(apiUrl(c, path), { method:"DELETE", headers: ghHeaders(c.token), body: JSON.stringify({ message:"borrar " + path, sha: f.sha, branch: c.branch }) });
+    }catch(e){}
+  }
+  $("btnSaveManage").addEventListener("click", function(){
+    var c = cfg(); var btn = $("btnSaveManage"); btn.disabled = true;
+    (async function(){
+      try{
+        mStatus("work", "Guardando cambios…");
+        var clean = mBatches.filter(function(b){ return (b.photos || []).length > 0; });
+        var content = serializeBatches(clean);
+        var res = await putFile(c, "photos.js", utf8ToB64(content), "editar fotos publicadas", mSha);
+        if (res && res.content) mSha = res.content.sha;
+        for (var i = 0; i < mRemoved.length; i++){ mStatus("work", "Borrando imágenes… (" + (i + 1) + "/" + mRemoved.length + ")"); await deleteFile(c, mRemoved[i]); }
+        mRemoved = []; mBatches = clean; renderManage();
+        var link = c.site ? '<a href="' + c.site + '" target="_blank">' + c.site + '</a>' : "tu sitio";
+        mStatus("ok", "✓ Guardado. " + link + " se actualiza en ~1 minuto.");
+      }catch(err){
+        var hint = /:\s*409/.test(err.message) ? " — Alguien (o vos) cambió photos.js mientras tanto; volvé a Cargar publicadas." : "";
+        mStatus("err", "✗ " + err.message + hint);
+      }finally{ btn.disabled = false; }
+    })();
+  });
+
 })();
 </script>
 </body>
