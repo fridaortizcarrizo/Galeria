@@ -481,6 +481,15 @@ main {
   .meta-line { flex-wrap: wrap; white-space: normal; }
 }
 
+    /* ── controles: orden + filtro de fecha ── */
+  .controls{display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;max-width:var(--maxw);margin:0 auto;padding:.3rem clamp(1.2rem,5vw,3rem) 0;font-family:var(--font-mono)}
+  .ctrl-group{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+  .ctrl-label{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+  .seg{font-family:var(--font-mono);font-size:.72rem;color:var(--ink-soft);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.34rem .8rem;cursor:pointer;transition:.18s}
+  .seg:hover{border-color:var(--gold);color:var(--ink)}
+  .seg.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .controls select{font-family:var(--font-mono);font-size:.72rem;color:var(--ink);background:#fffaf2;border:1px solid var(--line);border-radius:6px;padding:.34rem .6rem;cursor:pointer}
+  .controls select:focus{outline:none;border-color:var(--terracotta)}
   </style>
 </head>
 <body>
@@ -515,6 +524,20 @@ main {
   </p>
 
   <nav class="filters" id="filters" aria-label="Filtrar por categoría"></nav>
+  <div class="controls" id="controls">
+    <div class="ctrl-group">
+      <span class="ctrl-label">orden</span>
+      <button class="seg active" data-sort="desc">más nuevo</button>
+      <button class="seg" data-sort="asc">más viejo</button>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">fecha</span>
+      <select id="fYear"><option value="todos">todos los años</option></select>
+      <select id="fMonth"><option value="todos">todos los meses</option></select>
+      <select id="fDay"><option value="todos">todos los días</option></select>
+    </div>
+  </div>
+
   <main id="gallery"></main>
 
   <footer class="site-footer">
@@ -544,8 +567,8 @@ main {
      title: "Tarde en el parque",
      date: "2026-06-05",
      photos: [
-       { src: "images/perro-01.jpg", alt: "Perro corriendo", category: "animales" },
-       { src: "images/papa-retrato.jpg", alt: "Retrato de mi papá", category: "retrato" },
+       { src: "images/perro-01.jpg", alt: "Perro corriendo", tags: ["animales"] },
+       { src: "images/papa-retrato.jpg", alt: "Retrato de mi papá", tags: ["retrato", "familia"] },
      ],
    },
 */
@@ -569,6 +592,8 @@ const BATCHES = [
   // Lista plana de todas las fotos, en orden de aparición (para el lightbox)
   let flatPhotos = [];
   let currentFilter = "todas";
+  let currentSort = "desc";
+  let fY = "todos", fM = "todos", fD = "todos";
   let lbIndex = 0;
 
   // ── Fecha legible en español ──
@@ -585,11 +610,17 @@ const BATCHES = [
     }
   }
 
+  // ── tags de una foto (soporta tags:[...] y el viejo category:"...") ──
+  function photoTags(p) {
+    if (Array.isArray(p.tags)) return p.tags.filter(Boolean);
+    return p.category ? [p.category] : [];
+  }
+
   // ── Categorías únicas para los chips ──
   function getCategories() {
     const set = new Set();
     BATCHES.forEach((b) =>
-      b.photos.forEach((p) => p.category && set.add(p.category))
+      b.photos.forEach((p) => photoTags(p).forEach((t) => set.add(t)))
     );
     return ["todas", ...Array.from(set).sort()];
   }
@@ -616,9 +647,15 @@ const BATCHES = [
     flatPhotos = [];
     let visibleCount = 0;
 
-    BATCHES.forEach((batch) => {
+    const sorted = BATCHES.slice().sort((a, b) =>
+      currentSort === "asc"
+        ? (a.date < b.date ? -1 : a.date > b.date ? 1 : 0)
+        : (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)
+    );
+    sorted.forEach((batch) => {
+      if (!dateMatches(batch.date)) return;
       const photos = batch.photos.filter(
-        (p) => currentFilter === "todas" || p.category === currentFilter
+        (p) => currentFilter === "todas" || photoTags(p).indexOf(currentFilter) !== -1
       );
       if (photos.length === 0) return;
 
@@ -659,9 +696,8 @@ const BATCHES = [
         const cap = document.createElement("figcaption");
         cap.className = "cap";
         cap.innerHTML =
-          (photo.category
-            ? '<span class="tag">' + escapeHtml(photo.category) + "</span> · "
-            : "") + escapeHtml(photo.alt || "");
+          photoTags(photo).map((t) => '<span class="tag">' + escapeHtml(t) + "</span>").join(" ") +
+          (photoTags(photo).length ? " · " : "") + escapeHtml(photo.alt || "");
 
         card.appendChild(img);
         card.appendChild(cap);
@@ -703,8 +739,8 @@ const BATCHES = [
     lbImg.src = p.src;
     lbImg.alt = p.alt || "";
     lbCaption.innerHTML =
-      (p.category ? '<span class="tag">' + escapeHtml(p.category) + "</span> · " : "") +
-      escapeHtml(p.alt || "");
+      photoTags(p).map((t) => '<span class="tag">' + escapeHtml(t) + "</span>").join(" ") +
+      (photoTags(p).length ? " · " : "") + escapeHtml(p.alt || "");
   }
   function move(dir) {
     lbIndex = (lbIndex + dir + flatPhotos.length) % flatPhotos.length;
@@ -733,8 +769,65 @@ const BATCHES = [
       .replace(/"/g, "&quot;");
   }
 
+  // ── fecha: helpers y filtros ──
+  const MESES = ["","enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  function parts(dateStr){ const a = String(dateStr).split("-"); return { y:a[0]||"", m:a[1]||"", d:a[2]||"" }; }
+  function dateMatches(dateStr){
+    const p = parts(dateStr);
+    return (fY === "todos" || p.y === fY) && (fM === "todos" || p.m === fM) && (fD === "todos" || p.d === fD);
+  }
+  function fillSelect(sel, items, allLabel, labeller){
+    const cur = sel.value;
+    sel.innerHTML = '<option value="todos">' + allLabel + "</option>";
+    items.forEach((v) => {
+      const o = document.createElement("option");
+      o.value = v; o.textContent = labeller ? labeller(v) : v;
+      sel.appendChild(o);
+    });
+    sel.value = items.indexOf(cur) !== -1 ? cur : "todos";
+  }
+  function populateDateFilters(){
+    const yEl = document.getElementById("fYear"),
+          mEl = document.getElementById("fMonth"),
+          dEl = document.getElementById("fDay");
+    if (!yEl) return;
+    const years = [...new Set(BATCHES.map((b) => parts(b.date).y))].filter(Boolean).sort().reverse();
+    fillSelect(yEl, years, "todos los años");
+    fY = yEl.value;
+    const months = [...new Set(
+      BATCHES.filter((b) => fY === "todos" || parts(b.date).y === fY).map((b) => parts(b.date).m)
+    )].filter(Boolean).sort();
+    fillSelect(mEl, months, "todos los meses", (m) => MESES[parseInt(m, 10)] || m);
+    fM = mEl.value;
+    const days = [...new Set(
+      BATCHES.filter((b) => (fY === "todos" || parts(b.date).y === fY) && (fM === "todos" || parts(b.date).m === fM))
+             .map((b) => parts(b.date).d)
+    )].filter(Boolean).sort();
+    fillSelect(dEl, days, "todos los días", (d) => String(parseInt(d, 10)));
+    fD = dEl.value;
+  }
+  function setupControls(){
+    const ctr = document.getElementById("controls");
+    if (ctr) ctr.style.display = BATCHES.length ? "flex" : "none";
+    document.querySelectorAll(".seg").forEach((b) => {
+      b.addEventListener("click", () => {
+        currentSort = b.getAttribute("data-sort");
+        document.querySelectorAll(".seg").forEach((x) => x.classList.toggle("active", x === b));
+        renderGallery();
+      });
+    });
+    const yEl = document.getElementById("fYear"),
+          mEl = document.getElementById("fMonth"),
+          dEl = document.getElementById("fDay");
+    if (yEl) yEl.addEventListener("change", () => { fY = yEl.value; populateDateFilters(); renderGallery(); });
+    if (mEl) mEl.addEventListener("change", () => { fM = mEl.value; populateDateFilters(); renderGallery(); });
+    if (dEl) dEl.addEventListener("change", () => { fD = dEl.value; renderGallery(); });
+    populateDateFilters();
+  }
+
   // ── init ──
   renderFilters();
+  setupControls();
   renderGallery();
 })();
 
