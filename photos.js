@@ -2,8 +2,8 @@
 
 const BATCHES = [
   {
-    title: "Tanda sin título",
-    date: "2026-06-06",
+    title: "Recibida Valen",
+    date: "2026-06-05",
     photos: [
       { src: "images/1-dsc05159-3.jpg", alt: "", tags: ["naturaleza"] },
       { src: "images/2-dsc05169-3.jpg", alt: "", tags: ["naturaleza"] },
