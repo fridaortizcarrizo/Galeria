@@ -474,7 +474,8 @@ main {
 .lb-close:hover, .lb-nav:hover { color: var(--gold-soft); opacity: 1; }
 
 @media (max-width: 760px) {
-  .header-inner { grid-template-columns: 1fr; gap: 1.7rem; }
+  .header-inner { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+  .hero-text { min-width: 0; max-width: 100%; }
   .hero-photo { max-width: 440px; }
   .meta-line { flex-wrap: wrap; white-space: normal; }
 }
@@ -533,12 +534,16 @@ main {
   .toast.show{opacity:1;transform:translateX(-50%)}
   /* hero en celular */
   @media (max-width:760px){
+    html,body{overflow-x:hidden}
     .site-header{padding:2.4rem 1.1rem 2.4rem}
     .header-inner{gap:1.3rem}
     .hero-photo{width:100%;max-width:none;border-radius:6px}
+    .hero-text{min-width:0;max-width:100%}
     .hero-text .intro{font-size:.95rem;max-width:none}
     .meta-line{font-size:.66rem}
     .topbar{padding:.6rem .7rem}
+    .batch-head{flex-direction:column;align-items:flex-start;gap:.3rem}
+    .batch-meta{font-size:.66rem}
   }
   </style>
 </head>
@@ -745,11 +750,7 @@ main {
           cap.textContent = photo.alt;
           card.appendChild(cap);
         }
-        const acts = document.createElement("div");
-        acts.className = "card-actions";
-        acts.innerHTML = iconBtns(photo.src, false);
-        card.appendChild(acts);
-        card.addEventListener("click", (e) => { if (e.target.closest && e.target.closest(".card-actions")) return; openLightbox(idx); });
+        card.addEventListener("click", () => openLightbox(idx));
         grid.appendChild(card);
         visibleCount++;
       });
