@@ -337,15 +337,15 @@
           used.push({path:path,alt:p.alt,tags:p.tags});
         }
         setStatus("work","Actualizando el sitio\u2026");
-        var idx=await getFile(c,"index.html");
-        if(!idx) throw new Error("No encontré index.html en el repo. ¿Está subido y la rama es correcta?");
+        var idx=await getFile(c,"photos.js");
+        if(!idx) throw new Error("No encontré photos.js en el repo. ¿Está subido y la rama es correcta?");
         var text=b64ToUtf8(idx.content);
         var marker="const BATCHES = [";
         var at=text.indexOf(marker);
-        if(at<0) throw new Error("No encontré 'const BATCHES = [' en index.html.");
+        if(at<0) throw new Error("No encontré 'const BATCHES = [' en photos.js.");
         var insertAt=at+marker.length;
         var newText=text.slice(0,insertAt)+buildBatchBlock(title,date,used)+text.slice(insertAt);
-        await putFile(c,"index.html",utf8ToB64(newText),"nueva tanda: "+title,idx.sha);
+        await putFile(c,"photos.js",utf8ToB64(newText),"nueva tanda: "+title,idx.sha);
         var link=c.site?'<a href="'+c.site+'" target="_blank">'+c.site+'</a>':"tu sitio";
         setStatus("ok","✓ ¡Publicado! "+used.length+" foto(s). "+link+" se actualiza en ~1 minuto.");
         photos.forEach(function(p){ URL.revokeObjectURL(p.url); }); photos=[]; render(); $("batchTitle").value="";
