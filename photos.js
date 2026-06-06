@@ -5,6 +5,38 @@
 
 const BATCHES = [
   {
+    title: "Tanda sin título",
+    date: "2026-06-06",
+    photos: [
+      { src: "images/1-dsc03861.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/2-dsc03862.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/3-dsc03865.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/4-dsc03864.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/5-dsc03863.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/6-dsc03853.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/7-dsc03859.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/8-dsc03858.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/9-dsc03854.jpg", alt: "", tags: ["animales", "Perro", "retrato"] },
+      { src: "images/10-dsc03856.jpg", alt: "", tags: ["animales", "Perro", "retrato"] },
+      { src: "images/11-dsc03849.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/12-dsc03850.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/13-dsc03852.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/14-dsc03847.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/15-dsc03846.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/16-dsc03832.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/17-dsc03845.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/18-dsc03843.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/19-dsc03839.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/20-dsc03844.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/21-dsc03835.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/22-dsc03828.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/23-dsc03830.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/24-dsc03838.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/25-dsc03831.jpg", alt: "", tags: ["animales", "Perro"] },
+      { src: "images/26-dsc03827.jpg", alt: "", tags: ["animales", "Perro"] },
+    ],
+  },
+  {
     title: "Marcha Ni Una Menos",
     date: "2026-06-03",
     photos: [
