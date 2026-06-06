@@ -1,12 +1,9 @@
-/* ─────────────────────────────────────────────
-   TUS FOTOS. Este archivo lo maneja el etiquetador (tagger).
-   No hace falta que lo edites a mano.
-   ───────────────────────────────────────────── */
+/* TUS FOTOS. Lo maneja el etiquetador (tagger). */
 
 const BATCHES = [
   {
-    title: "Tanda sin título",
-    date: "2026-06-06",
+    title: "Siesta y Mandarinas",
+    date: "2026-05-27",
     photos: [
       { src: "images/1-dsc03861.jpg", alt: "", tags: ["animales", "Perro"] },
       { src: "images/2-dsc03862.jpg", alt: "", tags: ["animales", "Perro"] },
@@ -112,5 +109,4 @@ const BATCHES = [
       { src: "images/7-dsc03866-2.jpg", alt: "", tags: ["Cafeteria"] },
     ],
   },
-
 ];
