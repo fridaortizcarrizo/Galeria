@@ -317,9 +317,16 @@
       .then(function(r){ if(r.status===404) return null; if(!r.ok) return r.text().then(function(t){ throw new Error("GET "+path+": "+r.status+" "+t.slice(0,120)); }); return r.json(); });
   }
   function putFile(c,path,b64,message,sha){
-    var body={message:message,content:b64,branch:c.branch}; if(sha) body.sha=sha;
-    return fetch(apiUrl(c,path),{method:"PUT",headers:ghHeaders(c.token),body:JSON.stringify(body)})
-      .then(function(r){ if(!r.ok) return r.text().then(function(t){ throw new Error("PUT "+path+": "+r.status+" "+t.slice(0,160)); }); return r.json(); });
+    function attempt(useSha){
+      var body={message:message,content:b64,branch:c.branch}; if(useSha) body.sha=useSha;
+      return fetch(apiUrl(c,path),{method:"PUT",headers:ghHeaders(c.token),body:JSON.stringify(body)})
+        .then(function(r){ if(!r.ok) return r.text().then(function(t){ var e=new Error("PUT "+path+": "+r.status+" "+t.slice(0,160)); e.status=r.status; throw e; }); return r.json(); });
+    }
+    // si el sha quedó viejo (409), traigo el sha actual y reintento una sola vez
+    return attempt(sha).catch(function(e){
+      if(e.status===409){ return getFile(c,path).then(function(f){ return attempt(f?f.sha:undefined); }); }
+      throw e;
+    });
   }
   function freePath(c,path){
     return getFile(c,path).then(function(res){
