@@ -37,7 +37,6 @@ const BATCHES = [
     date: "2026-06-05",
     photos: [
       { src: "images/1-dsc05159-3.jpg", alt: "", tags: ["naturaleza"] },
-      { src: "images/2-dsc05169-3.jpg", alt: "", tags: ["naturaleza"] },
       { src: "images/3-dsc05189-3.jpg", alt: "", tags: ["naturaleza"] },
       { src: "images/4-dsc05142-3.jpg", alt: "", tags: ["naturaleza"] },
       { src: "images/5-dsc05193-3.jpg", alt: "", tags: ["naturaleza"] },
