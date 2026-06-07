@@ -2,6 +2,28 @@
 
 const BATCHES = [
   {
+    title: "Mañana en la Biblioteca Popular de Argüello",
+    date: "2026-06-05",
+    photos: [
+      { src: "images/10-dsc05130.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/1-img-1259.jpg", alt: "", tags: ["familia"] },
+      { src: "images/2-dsc05093.jpg", alt: "", tags: ["retrato", "familia"] },
+      { src: "images/3-dsc05105.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/4-dsc05095.jpg", alt: "", tags: ["retrato", "familia"] },
+      { src: "images/5-dsc05097.jpg", alt: "", tags: ["retrato", "familia"] },
+      { src: "images/6-dsc05104.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/7-dsc05102.jpg", alt: "", tags: ["retrato"] },
+      { src: "images/8-dsc05141.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/9-dsc05127.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/11-dsc05129.jpg", alt: "", tags: ["naturaleza"] },
+      { src: "images/12-dsc05120.jpg", alt: "", tags: ["retrato", "familia"] },
+      { src: "images/13-dsc05114.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/14-dsc05132.jpg", alt: "", tags: ["naturaleza", "animales"] },
+      { src: "images/15-dsc05136.jpg", alt: "", tags: ["naturaleza", "animales"] },
+      { src: "images/16-dsc05123.jpg", alt: "", tags: ["retrato", "familia"] },
+    ],
+  },
+  {
     title: "Sesión de retratos con Fran",
     date: "2026-05-31",
     photos: [
