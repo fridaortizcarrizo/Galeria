@@ -3,7 +3,7 @@
 const BATCHES = [
   {
     title: "Chau Barrio Brujo",
-    date: "2026-05-29",
+    date: "2026-05-28",
     photos: [
       { src: "images/dsc03977.jpg", alt: "", tags: ["retrato", "ciudad"] },
       { src: "images/dsc03978.jpg", alt: "", tags: ["retrato", "ciudad"] },
