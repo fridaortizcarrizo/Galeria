@@ -2,6 +2,18 @@
 
 const BATCHES = [
   {
+    title: "Cafecito con Fran",
+    date: "2026-05-30",
+    photos: [
+      { src: "images/1-dsc04187.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/2-dsc04188.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/3-dsc04214.jpg", alt: "", tags: ["ciudad", "retrato"] },
+      { src: "images/4-dsc04211.jpg", alt: "", tags: ["ciudad", "retrato"] },
+      { src: "images/5-dsc04189.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/6-dsc04212.jpg", alt: "", tags: ["ciudad", "retrato"] },
+    ],
+  },
+  {
     title: "Mañana en la Biblioteca Popular de Argüello",
     date: "2026-06-05",
     photos: [
