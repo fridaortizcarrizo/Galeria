@@ -2,6 +2,25 @@
 
 const BATCHES = [
   {
+    title: "Chau Barrio Brujo",
+    date: "2026-05-29",
+    photos: [
+      { src: "images/dsc03977.jpg", alt: "", tags: ["retrato", "ciudad"] },
+      { src: "images/dsc03978.jpg", alt: "", tags: ["retrato", "ciudad"] },
+      { src: "images/dsc03981.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/dsc03984.jpg", alt: "", tags: ["ciudad", "producto", "bebida"] },
+      { src: "images/dsc04002.jpg", alt: "", tags: ["ciudad", "bebida", "producto"] },
+      { src: "images/dsc04012.jpg", alt: "", tags: ["ciudad", "bebida", "producto"] },
+      { src: "images/dsc04022.jpg", alt: "", tags: ["ciudad", "comida", "producto"] },
+      { src: "images/dsc04034.jpg", alt: "", tags: ["ciudad"] },
+      { src: "images/dsc04036.jpg", alt: "", tags: ["ciudad", "bebida", "producto"] },
+      { src: "images/dsc04044.jpg", alt: "", tags: ["ciudad", "bebida", "producto"] },
+      { src: "images/dsc04054.jpg", alt: "", tags: ["ciudad", "bebida", "producto"] },
+      { src: "images/dsc04057.jpg", alt: "", tags: ["retrato", "ciudad"] },
+      { src: "images/dsc04181.jpg", alt: "", tags: ["retrato", "ciudad"] },
+    ],
+  },
+  {
     title: "Sobrinos gatunos al solcito 🌞",
     date: "2026-05-23",
     photos: [
