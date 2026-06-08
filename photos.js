@@ -2,6 +2,20 @@
 
 const BATCHES = [
   {
+    title: "Sobrinos gatunos al solcito 🌞",
+    date: "2026-05-23",
+    photos: [
+      { src: "images/1-dsc03494.jpg", alt: "", tags: ["animales", "gato"] },
+      { src: "images/2-dsc03513.jpg", alt: "", tags: ["animales", "gato"] },
+      { src: "images/3-dsc03511.jpg", alt: "", tags: ["animales", "gato"] },
+      { src: "images/4-dsc03491.jpg", alt: "", tags: ["animales", "gato"] },
+      { src: "images/5-dsc03493.jpg", alt: "", tags: ["animales", "gato"] },
+      { src: "images/6-dsc03495.jpg", alt: "", tags: ["animales", "gato"] },
+      { src: "images/7-dsc03507.jpg", alt: "", tags: ["animales", "gato"] },
+      { src: "images/8-dsc03484.jpg", alt: "", tags: ["animales", "gato"] },
+    ],
+  },
+  {
     title: "Cafecito con Fran",
     date: "2026-05-30",
     photos: [
