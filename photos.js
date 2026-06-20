@@ -2,6 +2,28 @@
 
 const BATCHES = [
   {
+    title: "Gatitas al sol",
+    date: "2026-06-20",
+    photos: [
+      { src: "images/1-dsc05584.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/2-dsc05566.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/3-dsc05574.jpg", alt: "", tags: ["gato", "naturaleza", "retrato", "perro"] },
+      { src: "images/4-dsc05585.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/5-dsc05595.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/6-dsc05573.jpg", alt: "", tags: ["gato", "naturaleza", "retrato", "perro"] },
+      { src: "images/7-dsc05593.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/8-dsc05597.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/9-dsc05635.jpg", alt: "", tags: ["gato", "naturaleza", "retrato", "familia"] },
+      { src: "images/10-dsc05649.jpg", alt: "", tags: ["gato", "naturaleza", "retrato", "familia"] },
+      { src: "images/11-dsc05612.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/12-dsc05650.jpg", alt: "", tags: ["gato", "naturaleza", "retrato", "familia"] },
+      { src: "images/13-dsc05613.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/14-dsc05648.jpg", alt: "", tags: ["gato", "naturaleza", "retrato", "familia"] },
+      { src: "images/15-dsc05655.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+      { src: "images/16-dsc05657.jpg", alt: "", tags: ["gato", "naturaleza", "retrato"] },
+    ],
+  },
+  {
     title: "Chau Barrio Brujo",
     date: "2026-05-29",
     photos: [
